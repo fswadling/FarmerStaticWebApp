@@ -1,7 +1,7 @@
 open Farmer
 open Farmer.Builders
 
-let pelt8StaticWebApp = staticWebApp {
+let staticWebApp = staticWebApp {
     name "staticwebapp"
     repository "web app github goes here"
     app_location "frontend"
@@ -10,9 +10,9 @@ let pelt8StaticWebApp = staticWebApp {
 
 let deployment = arm {
     location Location.WestEurope
-    add_resource pelt8StaticWebApp
+    add_resource staticWebApp
 }
 
 deployment
-    |> Deploy.execute "static-web-app-resources" [ pelt8StaticWebApp.RepositoryParameter, "github access token goes here" ]
+    |> Deploy.execute "static-web-app-resources" [ staticWebApp.RepositoryParameter, "github access token goes here" ]
     |> ignore
